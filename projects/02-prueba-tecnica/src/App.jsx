@@ -8,21 +8,23 @@ export default function App () {
   const [imageUrl, setImageUrl] = useState()
 
   // Cargar un hecho aleatorio al iniciar el componente
-  useEffect(() => {
+  function loadRandomFact () {
     getRandomFact().then(setFact)
-  }, [])
+  }
+  useEffect(loadRandomFact, [])
 
   // Cargar la imagen del gato al cambiar el hecho
-  useEffect(() => {
+  const loadCatImage = () => {
     if (!fact) return
 
     getCatImageFromFact({ fact }).then(setImageUrl)
-  }, [fact])
+  }
+  useEffect(loadCatImage, [fact])
 
   return (
     <main>
       <h1>App de Gatitos</h1>
-      <button onClick={getRandomFact}>Get new fact</button>
+      <button onClick={loadRandomFact}>Get new fact</button>
       {fact && <p>{fact}</p>}
       {imageUrl && <p><img src={imageUrl} alt={`Imagen aleatoria de gato generada con las primeras tres palabras de "${fact}"`} /></p>}
     </main>
