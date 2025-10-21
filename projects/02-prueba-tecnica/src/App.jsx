@@ -12,24 +12,29 @@ export default function App () {
   const CAT_ENDPOINT_IMAGE_URL = `https://cataas.com/cat/says/${firstThreeWords}?fontSize=50&fontColor=red&json=true`
 
   // Obtener un dato aleatorio de gato
-  useEffect(() => {
+  const getRandomFact = () => {
     fetch(CAT_ENDPOINT_RANDOM_FACT)
       .then(res => res.json())
       .then(data => setFact(data.fact))
-  }, [])
+  }
 
   // Obtener una imagen de gato con las primeras tres palabras del dato anterior
-  useEffect(() => {
+  const getCatImageFromFact = () => {
     if (!fact) return
 
     fetch(CAT_ENDPOINT_IMAGE_URL)
       .then(res => res.json())
       .then(data => setImageUrl(data.url))
-  }, [fact])
+  }
+
+  useEffect(getRandomFact, [])
+
+  useEffect(getCatImageFromFact, [fact])
 
   return (
     <main>
       <h1>App de Gatitos</h1>
+      <button onClick={getRandomFact}>Get new fact</button>
       {fact && <p>{fact}</p>}
       {imageUrl && <p><img src={imageUrl} alt={`Imagen aleatoria de gato generada con las primeras tres palabras de "${fact}"`} /></p>}
     </main>
