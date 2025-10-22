@@ -46,7 +46,7 @@ function App() {
         return boardToCheck[a]
       }
     }
-    return null
+    return
   }
 
   const updateBoard = (index) => {
