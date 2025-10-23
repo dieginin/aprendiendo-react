@@ -1,7 +1,7 @@
 import { checkEndGame, checkWinner } from "../logic/board"
 
 import { Square } from "./Square";
-import { TURNS } from "../constants";
+import { TURNS } from "../utils/constants";
 import { WinnerModal } from "../components/WinnerModal"
 import confetti from "canvas-confetti"
 import { useState } from "react";
