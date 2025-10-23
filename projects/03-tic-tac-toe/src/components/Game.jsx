@@ -1,5 +1,6 @@
 import { INITIAL_BOARD, INITIAL_TURN, TURNS } from "../utils/constants";
 import { checkEndGame, checkWinner } from "../logic/board"
+import { cleanGame, saveGame } from "../logic/storage";
 import { useEffect, useState } from "react";
 
 import { Square } from "./Square";
@@ -32,8 +33,7 @@ export default function Game() {
     setTurn(INITIAL_TURN)
     setWinner(null)
 
-    window.localStorage.removeItem("board")
-    window.localStorage.removeItem("turn")
+    cleanGame()
   }
 
   const updateBoard = (index) => {
@@ -47,8 +47,7 @@ export default function Game() {
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
 
-    window.localStorage.setItem("board", JSON.stringify(newBoard))
-    window.localStorage.setItem("turn", newTurn)
+    saveGame({ board: newBoard, turn: newTurn})
   }
   
   return (
