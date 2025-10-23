@@ -1,20 +1,39 @@
+import { INITIAL_BOARD, INITIAL_TURN, TURNS } from "../utils/constants";
 import { checkEndGame, checkWinner } from "../logic/board"
+import { useEffect, useState } from "react";
 
 import { Square } from "./Square";
-import { TURNS } from "../utils/constants";
 import { WinnerModal } from "../components/WinnerModal"
 import confetti from "canvas-confetti"
-import { useState } from "react";
 
 export default function Game() {
-  const [board, setBoard] = useState(Array(9).fill(null))
-  const [turn, setTurn] = useState(TURNS.X)
+  const [board, setBoard] = useState(() => {
+    const boardFromStorage = window.localStorage.getItem("board")
+    return boardFromStorage ? JSON.parse(boardFromStorage) : INITIAL_BOARD
+  })
+  const [turn, setTurn] = useState(() => {
+    const turnFromStorage = window.localStorage.getItem("turn")
+    return turnFromStorage ? turnFromStorage : INITIAL_TURN
+  })
   const [winner, setWinner] = useState(null)
 
+  useEffect(() => {
+    const newWinner = checkWinner(board)
+    if (newWinner) {
+      confetti()
+      setWinner(newWinner)
+    } else if (checkEndGame(board)) {
+      setWinner(false)
+    }
+  }, [board])
+
   const resetGame = () => {
-    setBoard(Array(9).fill(null))
-    setTurn(TURNS.X)
+    setBoard(INITIAL_BOARD)
+    setTurn(INITIAL_TURN)
     setWinner(null)
+
+    window.localStorage.removeItem("board")
+    window.localStorage.removeItem("turn")
   }
 
   const updateBoard = (index) => {
@@ -25,16 +44,11 @@ export default function Game() {
     newBoard[index] = turn
     setBoard(newBoard)
 
-    const newWinner = checkWinner(newBoard)
-    if (newWinner) {
-      confetti()
-      setWinner(newWinner)
-    } else if (checkEndGame(newBoard)) {
-      setWinner(false)
-    }
-
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
+
+    window.localStorage.setItem("board", JSON.stringify(newBoard))
+    window.localStorage.setItem("turn", newTurn)
   }
   
   return (
