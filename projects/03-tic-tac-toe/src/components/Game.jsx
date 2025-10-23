@@ -13,7 +13,7 @@ export default function Game() {
   })
   const [turn, setTurn] = useState(() => {
     const turnFromStorage = window.localStorage.getItem("turn")
-    return turnFromStorage ? turnFromStorage : INITIAL_TURN
+    return turnFromStorage ?? INITIAL_TURN
   })
   const [winner, setWinner] = useState(null)
 
