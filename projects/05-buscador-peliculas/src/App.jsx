@@ -1,28 +1,32 @@
 import "./App.css"
 
 import Movies from "./components/Movies"
+import debounce from "just-debounce-it"
+import { useMemo } from "react"
 import { useMovies } from "./hooks/useMovies"
 import { useSearch } from "./hooks/useSearch"
-import { useState } from "react"
+import { useSort } from "./hooks/useSort"
 
 function App() {
-  const [sort, setSort] = useState(false)
+  const { sort, handleSort } = useSort()
   const { search, updateSearch, error } = useSearch()
   const { movies, getMovies, loading } = useMovies({ search, sort })
 
+  const debouncedGetMovie = useMemo(
+    () => debounce((search) => getMovies({ search }), 300),
+    [getMovies]
+  )
   const handleSubmit = (event) => {
     event.preventDefault()
     getMovies({ search })
   }
 
   const handleChange = (event) => {
-    const newQuery = event.target.value
-    if (newQuery.startsWith(" ")) return
-    updateSearch(newQuery)
-  }
+    const query = event.target.value
+    if (query.startsWith(" ")) return
 
-  const handleSort = () => {
-    setSort(!sort)
+    updateSearch(query)
+    debouncedGetMovie(query)
   }
 
   return (
