@@ -1,9 +1,11 @@
 import "./Filters.css"
 
-import { useState } from "react"
+import { useId, useState } from "react"
 
 export function Filters({ onChange }) {
   const [minPrice, setMinPrice] = useState(0)
+  const minPriceFilterId = useId()
+  const categoryFilterId = useId()
 
   const handleChangeMinPrice = (event) => {
     setMinPrice(event.target.value)
@@ -14,33 +16,49 @@ export function Filters({ onChange }) {
     onChange((prevState) => ({ ...prevState, category: event.target.value }))
   }
 
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumSignificantDigits: 1,
-  })
-
   return (
     <section className='filters'>
       <div>
-        <label htmlFor='price'>Min price</label>
+        <label htmlFor={categoryFilterId}>Min price</label>
         <input
           type='range'
-          id='price'
+          id={categoryFilterId}
           min='0'
-          max='1000'
+          max='35000'
           value={minPrice}
           onChange={handleChangeMinPrice}
         />
-        <span>{formatter.format(minPrice)}</span>
+        <span>${minPrice}</span>
       </div>
 
       <div>
-        <label htmlFor='category'>Category</label>
-        <select id='category' onChange={handleChangeCategory}>
+        <label htmlFor={minPriceFilterId}>Category</label>
+        <select id={minPriceFilterId} onChange={handleChangeCategory}>
           <option value='all'>All</option>
+          <option value='beauty'>Beauty</option>
+          <option value='fragrances'>Fragrances</option>
+          <option value='furniture'>Furniture</option>
+          <option value='groceries'>Groceries</option>
+          <option value='home-decoration'>Home Decoration</option>
+          <option value='kitchen-accessories'>Kitchen Accessories</option>
           <option value='laptops'>Laptops</option>
+          <option value='mens-shirts'>Mens Shirts</option>
+          <option value='mens-shoes'>Mens Shoes</option>
+          <option value='mens-watches'>Mens Watches</option>
+          <option value='mobile-accessories'>Mobile Accessories</option>
+          <option value='motorcycle'>Motorcycle</option>
+          <option value='skin-care'>Skin Care</option>
           <option value='smartphones'>Smartphones</option>
+          <option value='sports-accessories'>Sports Accessories</option>
+          <option value='sunglasses'>Sunglasses</option>
+          <option value='tablets'>Tablets</option>
+          <option value='tops'>Tops</option>
+          <option value='vehicle'>Vehicle</option>
+          <option value='womens-bags'>Womens Bags</option>
+          <option value='womens-dresses'>Womens Dresses</option>
+          <option value='womens-jewellery'>Womens Jewellery</option>
+          <option value='womens-shoes'>Womens Shoes</option>
+          <option value='womens-watches'>Womens Watches</option>
         </select>
       </div>
     </section>
