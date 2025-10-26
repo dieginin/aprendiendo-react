@@ -1,29 +1,16 @@
 import "./Products.css"
 
-import { AddToCartIcon } from "./Icons"
-import { products as initialProducts } from "../mocks/products.json"
+import Product from "./Product"
 import { useFilters } from "../hooks/useFilters"
 
 export function Products() {
-  const { filterProducts } = useFilters()
-
-  const products = filterProducts(initialProducts)
+  const { products } = useFilters()
 
   return (
     <main className='products'>
       <ul>
         {products.map((product) => (
-          <li key={product.id}>
-            <img src={product.thumbnail} alt={product.title} />
-            <div>
-              <strong>{product.title}</strong> - ${product.price}
-            </div>
-            <div>
-              <button>
-                <AddToCartIcon />
-              </button>
-            </div>
-          </li>
+          <Product key={product.id} product={product} />
         ))}
       </ul>
     </main>

@@ -1,4 +1,5 @@
 import { FiltersContext } from "../context/filters"
+import { products as initialProducts } from "../mocks/products.json"
 import { useContext } from "react"
 
 export function useFilters() {
@@ -11,5 +12,7 @@ export function useFilters() {
         (filters.category === "all" || product.category === filters.category)
     )
 
-  return { filters, setFilters, filterProducts }
+  const products = filterProducts(initialProducts)
+
+  return { filters, setFilters, products }
 }
