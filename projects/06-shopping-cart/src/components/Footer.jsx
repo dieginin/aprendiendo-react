@@ -1,8 +1,11 @@
 import "./Footer.css"
 
 import { IS_DEVELOPMENT } from "../config"
+import { useFilters } from "../hooks/useFilters"
 
-export function Footer({ filters }) {
+export function Footer() {
+  const { filters } = useFilters()
+
   return (
     <footer className='footer'>
       {IS_DEVELOPMENT && JSON.stringify(filters, null, 2)}

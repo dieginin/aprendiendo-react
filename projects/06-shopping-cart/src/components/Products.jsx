@@ -1,8 +1,14 @@
 import "./Products.css"
 
 import { AddToCartIcon } from "./Icons"
+import { products as initialProducts } from "../mocks/products.json"
+import { useFilters } from "../hooks/useFilters"
 
-export function Products({ products }) {
+export function Products() {
+  const { filterProducts } = useFilters()
+
+  const products = filterProducts(initialProducts)
+
   return (
     <main className='products'>
       <ul>

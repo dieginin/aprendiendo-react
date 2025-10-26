@@ -1,11 +1,11 @@
 import "./index.css"
 
 import App from "./App.jsx"
-import { StrictMode } from "react"
+import { FiltersProvider } from "./context/filters.jsx"
 import { createRoot } from "react-dom/client"
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  <FiltersProvider>
     <App />
-  </StrictMode>
+  </FiltersProvider>
 )
