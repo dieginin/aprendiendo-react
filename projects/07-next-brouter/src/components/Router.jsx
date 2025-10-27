@@ -35,7 +35,7 @@ export function Router({
 
       params = matched.params
       return true
-    })?.Component || ErrorPage
+    })?.component || ErrorPage
 
   return <CurrentComponent params={params} />
 }

@@ -9,11 +9,11 @@ const Page404 = lazy(() => import("./pages/404"))
 const SearchPage = lazy(() => import("./pages/Search"))
 
 const appRoutes = [
-  { path: "/", Component: HomePage },
-  { path: "/:lang/about", Component: AboutPage },
+  { path: "/", component: HomePage },
+  { path: "/:lang/about", component: AboutPage },
   {
     path: "/member/:id/brawlers/:brawlerId",
-    Component: ({ params }) => (
+    component: ({ params }) => (
       <>
         <h1>Member {params.id}</h1>
         <h2>Brawler {params.brawlerId}</h2>
@@ -28,8 +28,8 @@ function App() {
       <Suspense fallback={<h1>Loading...</h1>}>
         {/* TODO Mejorar el loading */}
         <Router routes={appRoutes} errorPage={Page404}>
-          <Route path='/about' Component={AboutPage} />
-          <Route path='/search/:query' Component={SearchPage} />
+          <Route path='/about' component={AboutPage} />
+          <Route path='/search/:query' component={SearchPage} />
         </Router>
       </Suspense>
     </main>

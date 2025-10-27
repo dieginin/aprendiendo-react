@@ -1,3 +1,3 @@
-export function Route({ path, Component }) {
-  return { path, Component }
+export function Route({ path, component }) {
+  return { path, component }
 }

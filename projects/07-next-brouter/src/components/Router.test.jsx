@@ -35,8 +35,8 @@ describe("Router", () => {
     getCurrentPath.mockReturnValue("/about")
 
     const routes = [
-      { path: "/", Component: () => <h1>Home</h1> },
-      { path: "/about", Component: () => <h1>About</h1> },
+      { path: "/", component: () => <h1>Home</h1> },
+      { path: "/about", component: () => <h1>About</h1> },
     ]
     render(<Router routes={routes} />)
     expect(screen.getByText("About")).toBeTruthy()
@@ -49,7 +49,7 @@ describe("Router", () => {
       <Router>
         <Route
           path='/'
-          Component={() => {
+          component={() => {
             return (
               <>
                 <h1>Home</h1>
@@ -58,7 +58,7 @@ describe("Router", () => {
             )
           }}
         />
-        <Route path='/about' Component={() => <h1>About</h1>} />
+        <Route path='/about' component={() => <h1>About</h1>} />
       </Router>
     )
 
