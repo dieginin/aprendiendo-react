@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import { cleanup, render, screen } from "@testing-library/react"
 
-import { EVENTS } from "../consts"
+import { EVENTS } from "../utils/consts"
 import { Link } from "./Link"
 import { Route } from "./Route"
 import { Router } from "./Router"
