@@ -1,4 +1,4 @@
-import { EVENTS } from "../consts"
+import { EVENTS } from "./consts"
 
 export const getCurrentPath = () => window.location.pathname
 
