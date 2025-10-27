@@ -17,7 +17,7 @@
     "lint": "eslint .",
     "prepare": "npm run test && swc src/components src/utils src/index.jsx --ignore **/*.test.jsx -d lib --strip-leading-paths",
     "preview": "vite preview",
-    "test": "echo",
+    "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui"
   },
