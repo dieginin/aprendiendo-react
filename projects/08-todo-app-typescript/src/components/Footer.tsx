@@ -3,6 +3,7 @@ import Filters from "./Filters"
 
 interface Props {
   activeCount: number
+  completedCount: number
   filterSelected: Filter
   handleFilterChange: (filter: Filter) => void
   onClearCompleted: () => void
@@ -10,6 +11,7 @@ interface Props {
 
 export default function Footer({
   activeCount,
+  completedCount,
   filterSelected,
   handleFilterChange,
   onClearCompleted,
@@ -24,6 +26,12 @@ export default function Footer({
         filtersSelected={filterSelected}
         onFilterChange={handleFilterChange}
       />
+
+      {completedCount > 0 && (
+        <button className='clear-completed' onClick={onClearCompleted}>
+          Borrar completadas
+        </button>
+      )}
     </footer>
   )
 }

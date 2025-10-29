@@ -39,7 +39,9 @@ function App() {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id))
 
   const handleFilterChange = (filter: Filter) => setFilterSelected(filter)
-  const handleClearCompleted = () => {}
+
+  const handleClearCompleted = () =>
+    setTodos((prevTodos) => prevTodos.filter((todo) => !todo.completed))
 
   const filteredTodos = todos.filter((todo) => {
     if (filterSelected === TODO_FILTERS.ACTIVE) return !todo.completed
@@ -56,6 +58,7 @@ function App() {
       />
       <Footer
         activeCount={filteredTodos.length}
+        completedCount={todos.filter((todo) => todo.completed).length}
         filterSelected={filterSelected}
         handleFilterChange={handleFilterChange}
         onClearCompleted={handleClearCompleted}
