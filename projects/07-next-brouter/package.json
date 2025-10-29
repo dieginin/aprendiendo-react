@@ -1,6 +1,6 @@
 {
-  "name": "next-brouter",
-  "version": "0.0.5",
+  "name": "pathbale",
+  "version": "0.0.1",
   "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",

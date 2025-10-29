@@ -1,7 +1,6 @@
-import { Suspense, lazy } from "react"
-
 import { Route } from "./components/Route"
 import { Router } from "./components/Router"
+import { lazy } from "react"
 
 const AboutPage = lazy(() => import("./pages/About"))
 const HomePage = lazy(() => import("./pages/Home"))
@@ -25,13 +24,10 @@ const appRoutes = [
 function App() {
   return (
     <main>
-      <Suspense fallback={<h1>Loading...</h1>}>
-        {/* TODO Mejorar el loading */}
-        <Router routes={appRoutes} errorPage={Page404}>
-          <Route path='/about' component={AboutPage} />
-          <Route path='/search/:query' component={SearchPage} />
-        </Router>
-      </Suspense>
+      <Router routes={appRoutes} errorPage={Page404}>
+        <Route path='/about' component={AboutPage} />
+        <Route path='/search/:query' component={SearchPage} />
+      </Router>
     </main>
   )
 }

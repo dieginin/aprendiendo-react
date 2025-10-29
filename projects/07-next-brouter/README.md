@@ -1,3 +1,7 @@
-# Next Brouter
+`next-navigator` is the primary package in the React Router project.
 
-Simple router for react based on React Router
+## Installation
+
+```sh
+npm i next-navigator
+```
