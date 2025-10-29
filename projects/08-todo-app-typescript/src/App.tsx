@@ -23,12 +23,24 @@ const mockTodos = [
 function App() {
   const [todos, setTodos] = useState(mockTodos)
 
+  const handleComplete = (id: TodoId) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    )
+  }
+
   const handleRemove = (id: TodoId) =>
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id))
 
   return (
     <div className='todoapp'>
-      <Todos todos={todos} onRemove={handleRemove} />
+      <Todos
+        todos={todos}
+        onComplete={handleComplete}
+        onRemove={handleRemove}
+      />
     </div>
   )
 }

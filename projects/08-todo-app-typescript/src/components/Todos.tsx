@@ -4,10 +4,11 @@ import Todo from "./Todo"
 
 interface Props {
   todos: ListOfTodos
+  onComplete: (id: TodoId) => void
   onRemove: (id: TodoId) => void
 }
 
-export default function Todos({ todos, onRemove }: Props) {
+export default function Todos({ todos, onComplete, onRemove }: Props) {
   return (
     <ul className='todo-list'>
       {todos.map((todo) => (
@@ -16,6 +17,7 @@ export default function Todos({ todos, onRemove }: Props) {
             id={todo.id}
             title={todo.title}
             completed={todo.completed}
+            onComplete={onComplete}
             onRemove={onRemove}
           />
         </li>
