@@ -1,3 +1,4 @@
+import type { TodoId } from "./types"
 import Todos from "./components/Todos"
 import { useState } from "react"
 
@@ -22,9 +23,12 @@ const mockTodos = [
 function App() {
   const [todos, setTodos] = useState(mockTodos)
 
+  const handleRemove = (id: TodoId) =>
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id))
+
   return (
     <div className='todoapp'>
-      <Todos todos={todos} />
+      <Todos todos={todos} onRemove={handleRemove} />
     </div>
   )
 }

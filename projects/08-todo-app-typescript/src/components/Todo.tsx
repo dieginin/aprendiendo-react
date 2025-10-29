@@ -1,6 +1,10 @@
-import type { Todo } from "../types"
+import type { Todo, TodoId } from "../types"
 
-export default function Todo({ id, title, completed }: Todo) {
+interface Props extends Todo {
+  onRemove: (id: TodoId) => void
+}
+
+export default function Todo({ id, title, completed, onRemove }: Props) {
   return (
     <div className='view'>
       <input
@@ -10,12 +14,7 @@ export default function Todo({ id, title, completed }: Todo) {
         onChange={() => {}}
       />
       <label>{title}</label>
-      <button
-        className='destroy'
-        onClick={() => {
-          console.log(id)
-        }}
-      ></button>
+      <button className='destroy' onClick={() => onRemove(id)}></button>
     </div>
   )
 }
