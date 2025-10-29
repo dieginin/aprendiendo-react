@@ -1,3 +1,4 @@
+import "./index.css"
 import "todomvc-app-css/index.css"
 
 import App from "./App.tsx"
