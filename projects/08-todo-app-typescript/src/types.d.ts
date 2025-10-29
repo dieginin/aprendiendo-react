@@ -4,8 +4,8 @@ export interface Todo {
   completed: boolean
 }
 
-export type TodoId = Pick<Todo, "id">["id"]
-export type TodoTitle = Pick<Todo, "title">["title"]
-export type TodoCompleted = Pick<Todo, "completed">["completed"]
+export type TodoId = Todo["id"]
+export type TodoTitle = Todo["title"]
+export type TodoCompleted = Todo["completed"]
 
 export type ListOfTodos = Todo[]
