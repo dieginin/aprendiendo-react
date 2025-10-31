@@ -1,23 +1,24 @@
-import type { Filter, TodoId } from "./types"
+import type { Filter, TodoId, TodoTitle } from "./types"
 
 import Footer from "./components/Footer"
+import Header from "./components/Header"
 import { TODO_FILTERS } from "./consts"
 import Todos from "./components/Todos"
 import { useState } from "react"
 
 const mockTodos = [
   {
-    id: 1,
+    id: "1",
     title: "Aprender TypeScript",
     completed: false,
   },
   {
-    id: 2,
+    id: "2",
     title: "Aprender React",
     completed: true,
   },
   {
-    id: 3,
+    id: "3",
     title: "Aprender Vite",
     completed: false,
   },
@@ -49,8 +50,20 @@ function App() {
     return true
   })
 
+  const handleAddTodo = (title: TodoTitle) => {
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      {
+        id: crypto.randomUUID(),
+        title,
+        completed: false,
+      },
+    ])
+  }
+
   return (
     <div className='todoapp'>
+      <Header addTodo={handleAddTodo} />
       <Todos
         todos={filteredTodos}
         onComplete={handleComplete}
